@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - '**'
-      - main
   pull_request:
     branches:
       - '**'
+  push:
+    branches:
+      - main
 
 jobs:
 
@@ -27,9 +29,11 @@ jobs:
         run: |
           npm install
           npm test
+
       - name: Build Docker image
         run: |
           docker build -t dockerdys/springboot-app:main .
+
       - name: Build documentation
         run: |
           mvn javadoc:javadoc
@@ -50,10 +54,12 @@ jobs:
         run: |
           docker build -t dockerdys/springboot-app:main .
           docker push dockerdys/springboot-app:main
+
       - name: Deploy to Render
         run: |
           curl -X POST https://api.render.com/v1/services/srv-cta300rtq21c73bv7egg/deploy \
           -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
+
       - name: Deploy documentation to Netlify
         run: |
           netlify deploy --prod --dir=.
@@ -67,8 +73,9 @@ jobs:
       - name: Add workflow status badge to README
         run: |
           echo "![CI/CD Status](https://img.shields.io/github/workflow/status/${{ github.repository }}/CI/CD%20Pipeline?label=CI%2FCD%20Status)" >> README.md
-          git config --global user.name "Etienne"
-          git config --global user.email "etienne.baillie@gmail.com"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
           git add README.md
           git commit -m "Update README with CI/CD status badge"
           git push origin main
