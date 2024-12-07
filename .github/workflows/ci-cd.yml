@@ -64,10 +64,13 @@ jobs:
           docker build -t dockerdys/springboot-app:main .
           docker push dockerdys/springboot-app:main
 
-      - name: Deploy to Render
+      - name: Trigger Render Deploy
         run: |
-          curl -X POST https://api.render.com/v1/services/srv-cta300rtq21c73bv7egg/deploy \
-          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
+          curl --request POST \
+               --url https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys \
+               --header 'accept: application/json' \
+               --header 'content-type: application/json' \
+               --header "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
 
       - name: Deploy documentation to Netlify
         run: |
