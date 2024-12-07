@@ -4,12 +4,10 @@ on:
   push:
     branches:
       - '**'
+      - main
   pull_request:
     branches:
       - '**'
-  push:
-    branches:
-      - main
 
 jobs:
 
@@ -29,11 +27,9 @@ jobs:
         run: |
           npm install
           npm test
-
       - name: Build Docker image
         run: |
           docker build -t dockerdys/springboot-app:main .
-
       - name: Build documentation
         run: |
           mvn javadoc:javadoc
@@ -54,12 +50,10 @@ jobs:
         run: |
           docker build -t dockerdys/springboot-app:main .
           docker push dockerdys/springboot-app:main
-
       - name: Deploy to Render
         run: |
           curl -X POST https://api.render.com/v1/services/srv-cta300rtq21c73bv7egg/deploy \
           -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
-
       - name: Deploy documentation to Netlify
         run: |
           netlify deploy --prod --dir=.
