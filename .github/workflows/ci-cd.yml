@@ -73,13 +73,13 @@ jobs:
                --header "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
 
       - name: Deploy to Netlify
+
         env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_ACCESS_TOKEN }}
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}  
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         run: |
 
-          netlify link --auth $NETLIFY_AUTH_TOKEN
-
-          netlify link --auth $NETLIFY_AUTH_TOKEN --site ${{ secrets.NETLIFY_SITE_ID }}
+          netlify link --auth $NETLIFY_AUTH_TOKEN --filter $NETLIFY_SITE_ID
 
           netlify deploy --prod --dir=. --auth $NETLIFY_AUTH_TOKEN
 
