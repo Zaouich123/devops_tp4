@@ -73,9 +73,10 @@ jobs:
                --header "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
 
       - name: Deploy to Netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_ACCESS_TOKEN }}
         run: |
-          netlify login --auth {{ secrets.NETLIFY_ACCESS_TOKEN }}
-          netlify deploy --prod --dir=.
+          netlify deploy --prod --dir=. --auth $NETLIFY_AUTH_TOKEN
 
   badge:
     runs-on: ubuntu-latest
