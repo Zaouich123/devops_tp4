@@ -72,8 +72,9 @@ jobs:
                --header 'content-type: application/json' \
                --header "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
 
-      - name: Deploy documentation to Netlify
+      - name: Deploy to Netlify
         run: |
+          echo ${{ secrets.NETLIFY_ACCESS_TOKEN }} | netlify login --auth
           netlify deploy --prod --dir=.
 
   badge:
