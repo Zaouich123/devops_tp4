@@ -57,3 +57,4 @@ The static site files will be available in `target/reports/apidocs`.
 ![CI/CD Status](https://img.shields.io/github/workflow/status/Zaouich123/devops_tp4/CI/CD%20Pipeline?label=CI%2FCD%20Status)
 ![CI/CD Status](https://img.shields.io/github/workflow/status/Zaouich123/devops_tp4/CI/CD%20Pipeline?label=CI%2FCD%20Status)
 ![CI/CD Status](https://img.shields.io/github/workflow/status/Zaouich123/devops_tp4/CI/CD%20Pipeline?label=CI%2FCD%20Status)
+![CI/CD Status](https://img.shields.io/github/workflow/status/Zaouich123/devops_tp4/CI/CD%20Pipeline?label=CI%2FCD%20Status)
