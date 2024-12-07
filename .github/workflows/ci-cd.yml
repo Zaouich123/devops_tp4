@@ -74,7 +74,7 @@ jobs:
 
       - name: Deploy to Netlify
         run: |
-          echo ${{ secrets.NETLIFY_ACCESS_TOKEN }} | netlify login --auth
+          netlify login --auth {{ secrets.NETLIFY_ACCESS_TOKEN }}
           netlify deploy --prod --dir=.
 
   badge:
