@@ -77,6 +77,8 @@ jobs:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_ACCESS_TOKEN }}
         run: |
 
+          netlify link --auth $NETLIFY_AUTH_TOKEN
+
           netlify link --auth $NETLIFY_AUTH_TOKEN --site ${{ secrets.NETLIFY_SITE_ID }}
 
           netlify deploy --prod --dir=. --auth $NETLIFY_AUTH_TOKEN
